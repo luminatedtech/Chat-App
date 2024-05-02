@@ -1,5 +1,6 @@
 defmodule ChatAppWeb.UserController do
   alias ChatAppWeb.User
+  alias Guardian
   use ChatAppWeb, :controller
   use Ecto.Repo,
     otp_app: :chat_app,
