@@ -17,13 +17,19 @@ defmodule ChatAppWeb.Router do
   pipeline :browser_session do
     plug Guardian.Plug.VerifySession, claims: %{"typ" => "access"}
     plug Guardian.Plug.LoadResource
+    plug Guardian.Plug.EnsureAuthenticated
   end
 
   scope "/", ChatAppWeb do
     pipe_through :browser
 
     get "/", PageController, :home
-    live "/chat", ChatRoomLive
+    get "/register", UserController, :new
+    post "/register", UserController, :create
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    delete "/logout", SessionController, :delete
+
   end
 
   # Other scopes may use custom stacks.

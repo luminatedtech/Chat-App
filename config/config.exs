@@ -64,3 +64,8 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
+
+config :guardian, Guardian,
+  issuer: "ChatAppWeb",
+  allowed_algos: ["HS512"],
+  secret_key: "GFTeve9ZrwWO61XLMiQUwUXMzkckTMJfVJWTtZfKKLg4ieZsDiI2qJAWM9eh73yY"

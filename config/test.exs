@@ -31,3 +31,7 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :guardian, Guardian,
+  allowed_algos: ["HS512"],
+  secret_key: "GFTeve9ZrwWO61XLMiQUwUXMzkckTMJfVJWTtZfKKLg4ieZsDiI2qJAWM9eh73yY"
