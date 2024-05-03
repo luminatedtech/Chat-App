@@ -7,8 +7,18 @@ defmodule ChatAppWeb.UserSocket do
   # assign values that can be accessed by your channel topics.
 
   ## Channels
+  # Uncomment the following line to define a "room:*" topic
+  # pointing to the `ChatAppWeb.RoomChannel`:
 
-  channel "chat_room:*", ChatAppWeb.ChatRoomChannel
+  channel "room:*", ChatAppWeb.RoomChannel
+  #
+  # To create a channel file, use the mix task:
+  #
+  #     mix phx.gen.channel Room
+  #
+  # See the [`Channels guide`](https://hexdocs.pm/phoenix/channels.html)
+  # for further details.
+
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

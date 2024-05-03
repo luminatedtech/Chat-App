@@ -23,11 +23,6 @@ defmodule ChatAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    get "/register", UserController, :new
-    post "/register", UserController, :create
-    get "/login", SessionController, :new
-    post "/login", SessionController, :create
-    delete "/logout", SessionController, :delete
     live "/chat", ChatRoomLive
   end
 
