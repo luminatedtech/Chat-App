@@ -64,16 +64,18 @@ channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
-  channel.on("new_msg", payload => {
-    let messageItem = document.createElement("p")
-    messageItem.innerText = `[${Date()}] ${payload.body}`
-    messagesContainer.appendChild(messageItem)
-  })
   chatInput.addEventListener("keypress", event => {
     if(event.key === 'Enter'){
       channel.push("new_msg", {body: chatInput.value})
       chatInput.value = ""
     }
   })
+  
+  channel.on("new_msg", payload => {
+    let messageItem = document.createElement("p")
+    messageItem.innerText = `[${Date()}] ${payload.body}`
+    messagesContainer.appendChild(messageItem)
+  })
+
   
 export default socket
