@@ -6,4 +6,8 @@ defmodule ChatAppWeb.PageController do
     # so skip the default app layout.
     render(conn, :home, layout: false)
   end
+
+  def name(conn, _params) do
+    render(conn, :name, layout: false)
+  end
 end

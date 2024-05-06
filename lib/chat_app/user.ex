@@ -23,11 +23,15 @@ defmodule ChatApp.User do
     case changeset.valid? do
       true ->
         case changeset.data[:password] do
-          nil -> changeset
+          nil ->
+            changeset
+
           password ->
             put_change(changeset, :password_hash, Argon2.hash_pwd_salt(password))
         end
-      false -> changeset
+
+      false ->
+        changeset
     end
   end
 end

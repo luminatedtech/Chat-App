@@ -59,22 +59,27 @@ socket.connect()
 let channel = socket.channel("room:lobby", {})
 let chatInput         = document.querySelector("#chat-input")
 let messagesContainer = document.querySelector("#messages")
+let nameInput = document.querySelector("#name-input")
 
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
+  
 
+
+  
   chatInput.addEventListener("keypress", event => {
     if(event.key === 'Enter'){
-      channel.push("new_msg", {body: chatInput.value})
+      let message = chatInput.value
+      let username = nameInput.value 
+      channel.push("new_msg", {username: username, body: message}) 
       chatInput.value = ""
     }
   })
-  
   channel.on("new_msg", payload => {
     let messageItem = document.createElement("p")
-    messageItem.innerText = `[${Date()}] ${payload.body}`
-    messagesContainer.appendChild(messageItem)
+  messageItem.innerText = `[${payload.username} - ${Date()}] ${payload.body}` // Display username in the message
+  messagesContainer.appendChild(messageItem)
   })
 
   

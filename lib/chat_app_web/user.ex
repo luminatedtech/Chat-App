@@ -9,6 +9,7 @@ defmodule ChatAppWeb.User do
     field :password_hash, :string
     timestamps()
   end
+
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:username, :email, :password])
@@ -16,15 +17,20 @@ defmodule ChatAppWeb.User do
     |> unique_constraint(:email)
     |> put_password_hash()
   end
+
   defp put_password_hash(changeset) do
     case changeset.valid? do
       true ->
         case changeset.data[:password] do
-          nil -> changeset
+          nil ->
+            changeset
+
           password ->
             put_change(changeset, :password_hash, Argon2.hash_pwd_salt(password))
         end
-      false -> changeset
+
+      false ->
+        changeset
     end
   end
 end

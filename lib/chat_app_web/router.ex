@@ -1,4 +1,5 @@
 defmodule ChatAppWeb.Router do
+  alias ChatAppWeb.ChatLive
   use ChatAppWeb, :router
 
   pipeline :browser do
@@ -22,14 +23,13 @@ defmodule ChatAppWeb.Router do
 
   scope "/", ChatAppWeb do
     pipe_through :browser
-
-    get "/", PageController, :home
+    live "/chatroom", ChatRoomLive
+    get "/", PageController, :name
     get "/register", UserController, :new
     post "/register", UserController, :create
     get "/login", SessionController, :new
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
-
   end
 
   # Other scopes may use custom stacks.
@@ -52,6 +52,5 @@ defmodule ChatAppWeb.Router do
       live_dashboard "/dashboard", metrics: ChatAppWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
-
   end
 end

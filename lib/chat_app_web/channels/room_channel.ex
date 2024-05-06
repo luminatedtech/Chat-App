@@ -10,10 +10,9 @@ defmodule ChatAppWeb.RoomChannel do
     {:error, %{reason: "unauthorized"}}
   end
 
-
   # broadcast!/3 will notify all joined clients on this socket's topic and invoke their handle_out/3 callbacks.
-  def handle_in("new_msg", %{"body" => body}, socket) do
-    broadcast!(socket, "new_msg", %{body: body})
+  def handle_in("new_msg", %{"body" => body, "username" => username}, socket) do
+    broadcast!(socket, "new_msg", %{username: username, body: body})
     {:noreply, socket}
   end
 
